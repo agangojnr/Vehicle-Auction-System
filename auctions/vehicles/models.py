@@ -67,8 +67,7 @@ class Vehicle(models.Model):
     views = models.IntegerField(default=0)
 
     def __str__(self):
-            return self.make.name
-
+        return str(self.v_id)[:8]  
 class VehicleImage(models.Model):
     vehicle= models.ForeignKey(Vehicle, on_delete=models.CASCADE)
     image = models.FileField(upload_to='vehicleimages/',default='images/default-vehicle.png',blank=True)

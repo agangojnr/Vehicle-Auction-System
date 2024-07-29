@@ -32,10 +32,12 @@ class VehicleViewInline(admin.TabularInline):
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
     list_display = ('v_id', 'make', 'model', 'YOM', 'mileage', 'engine_cc', 'body_type', 'fuel_type', 'get_bid_status_display', 'reserve_price', 'created_at', 'updated_at')
-    search_fields = ('make__name', 'model__name', 'YOM__year', 'created_by__email', 'bid_status')
+    search_fields = ('make__name', 'model__name', 'YOM__year','v_id', 'bid_status')
     list_filter = ('make', 'model', 'YOM', 'body_type', 'fuel_type', 'created_at', 'updated_at')
     inlines = [VehicleImageInline, BidInline,VehicleViewInline]
-
+    def v_id(self, obj):
+        return str(obj.v_id)[:8]
+    v_id.short_description = 'V_ID'
 
 
 @admin.register(VehicleMake)
