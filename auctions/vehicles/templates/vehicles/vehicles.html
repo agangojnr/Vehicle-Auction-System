@@ -3,6 +3,7 @@
 {% load static %}
 <html>
 {% block content%}
+<div class="container">
 <div class="jumbotron center">
 
     <h3 class="text-center">
@@ -57,9 +58,30 @@
           </div>
       </div>
       {% endfor %}
+
+
+      <div class="col-md-4">
+        <div class="card car_cad">
+            <div class="car_image">
+                <img class="car_img" src="{% static 'images/car4.jpg' %}" />
+            </div>       
+            
+            <div class="card-body">
+                <label for="">2019 • Honda • Fit</label>
+                <br><span class="car_info">53,505 KM • 1,990 CC • Automatic • Petrol • KDG 833Q</span>
+                <br>
+                <hr/>
+                <label for="">Ksh 4,700,000</label>
+            </div>
+          </div>
+      </div>
+
+
     </div>
     <div class="col-md-3"></div>
 </div>
-</div>{% endblock content%}
+</div>
+</div>
+{% endblock content%}
 
 </html>
