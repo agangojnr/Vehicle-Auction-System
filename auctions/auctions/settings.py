@@ -35,14 +35,15 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.humanize',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'vehicles',
     'users.apps.UsersConfig',
     'crispy_forms',
-     "crispy_bootstrap5",
-     'django_filters'
+    "crispy_bootstrap5",
+    'django_filters',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
