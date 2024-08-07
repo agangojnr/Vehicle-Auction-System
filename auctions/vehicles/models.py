@@ -50,9 +50,13 @@ class VehicleBody(models.Model):
 
 class Vehicle(models.Model):
     BID_STATUS_CHOICES = [
-        ('available', 'available'),
-        ('on_auction', 'on_auction'),
-        ('on_bid', 'on_bid'),
+        ('Available', 'Available'),
+        ('On_auction', 'On_auction'),
+        ('On_bid', 'On_bid'),
+    ]
+    TRANSMISSION_CHOICES=[
+        ('Automatic','Automatic'),
+        ('Manual','Manual')
     ]
     v_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     registration_no = models.CharField(max_length=255,unique=True)
@@ -63,6 +67,7 @@ class Vehicle(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     engine_cc = models.IntegerField()
+    transmission = models.CharField(max_length=255, choices=TRANSMISSION_CHOICES,blank=True)
     body_type = models.ForeignKey(VehicleBody, on_delete=models.CASCADE)
     fuel_type = models.ForeignKey(FuelType, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=BID_STATUS_CHOICES, default='available')
