@@ -7,10 +7,6 @@
     padding-top: 6%;
   }
   
-  .jumbotron {
-      padding: 2rem 2rem;
-  }
-  
   .card {
       margin-bottom: 2rem;
   }
@@ -504,4 +500,8 @@
   }
   .login-card{
     margin-top: 20%;
+  }
+  .form-group{
+    padding: 20px !important;
+    margin: 10px important;
   }
