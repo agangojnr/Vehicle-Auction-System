@@ -1,6 +1,8 @@
 {% extends 'vehicles/base.html'%}
 {% load crispy_forms_tags%}
 {% load static %}
+{% load humanize %}
+
 <html>
 {% block content%}
 <div class="container cont-vehicles">
@@ -11,25 +13,25 @@
             <li>Vehicles</li>
           </ul>
     
-    <form method="get" class="form-inline my-2 my-lg-0 p-2 m-2 p-3" >
+    <form method="get" class="form-inline my-2 my-lg-0 p-1 m-2 p-1" >
     
-            <div class="form-row">
-                <div class="form-group ml-2">
+            <div class="form-row p-2">
+                <div class="form-group ml-2 p-4">
                     {{ vehiclefilter.form.make|as_crispy_field }}
                 </div>
-                <div class="form-group ml-2">
+                <div class="form-group ml-2 p-2">
                     {{ vehiclefilter.form.model|as_crispy_field }}
                 </div>
-                <div class="form-group ml-2">
+                <div class="form-group ml-2 p-4">
                     {{ vehiclefilter.form.YOM|as_crispy_field }}
                 </div>
-                <div class="form-group ml-2">
+                <div class="form-group ml-2 p-2" >
                     {{ vehiclefilter.form.body_type|as_crispy_field }}
                 </div>
-                <div class="form-group ml-2">
+                <div class="form-group ml-2 p-2">
                     {{ vehiclefilter.form.engine_cc|as_crispy_field }}
                 </div>
-                <div class="form-group ml-2">
+                <div class="form-group ml-2 p-4">
                     {{ vehiclefilter.form.fuel_type|as_crispy_field }}
                 </div>
             </div>
@@ -37,12 +39,7 @@
             <a href="{% url 'vehicles' %}" class="btn btn-secondary mt-2 ml-2">Clear Filters</a>
 
         </form>
-     {% comment %} <form class="form-inline my-2 my-lg-0 p-2 m-2 p-3" method="GET">
-   
-            {{vehiclefilter.form|crispy}}
-
-            <button type="submit" class="btn btn-info m-2">Filter</button>
-        </form> {% endcomment %}
+    
         <!-- <div class="text-center row">
             <p>{{vehicles_count}} Vehicles on Auction.</p>
         </div> -->
@@ -73,16 +70,21 @@
                         <label class="car_name"><a href="{% url 'detail' vehicle.id%}">{{vehicle.YOM}} • {{vehicle.make}} • {{vehicle.model}}</a></label>
                     </div>
                     <div class="col-md-12">
-                        <span class="car_info">53,505 KM • 1,990 CC • Automatic • Petrol • KDG 833Q</span>
+                        <span class="car_info">{{ vehicle.mileage }} KM • {{vehicle.engine_cc}} CC • {{vehicle.fuel_type}} • {{vehicle.registration_no}}</span>
                     </div>
                     <div class="col-md-12">
                         <hr/>
                     </div>
                     <div class="col-md-6">
-                        <label for="">Ksh {{vehicle.reserve_price}}</label>
+                        <label for="">Ksh {{vehicle.reserve_price|intcomma}}</label>
                     </div>
                     <div class="col-md-6 text-right">
-                        <span class="car_info">August 22 2024</span>
+                        {% if vehicle.status == 'on_auction' %}
+                        <span class="car_info">Auction End Date: {{ vehicle.current_auction_end_date }}
+                        {% else %}
+                        <span class="car_info">Auction endend
+                        {% endif %}
+                        </span>
                         <br><span class="car_info">13d :14 :45 :50</span>
                     </div>
                 </div>

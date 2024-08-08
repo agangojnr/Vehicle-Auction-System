@@ -117,28 +117,55 @@
         
         <div class="right_box">
             <span class="badge views-bg pull-right">Views: {{ vehicle.views }}</span>
-            <h4 class="right-header">2016,TOYOTA SUCCEED</h4>
+            <h4 class="right-header">{{vehicle.YOM}}, {{vehicle.make}} {{vehicle.model}}</h4>
 
             <div class="vehicle_info">             
                 <h6>Yard Name: <b>Riverlong Storage Yard</b></h6>                
-                <h6>KDN 265F | AUTO | 1490 CC</h6>  
+                <h6>{{vehicle.registration_no}} | {{vehicle.transmission}} | {{vehicle.engine_cc}} CC</h6>  
             </div>
 
-            <div class="vehicle_more_info">
-                <span class="badge highest-bid mb-2">Highest Bid: Ksh 1,200,000</span><br>
-                <h6>Reserved Price: <label>Ksh 1,025,000</label> </h6>               
+            <div class="vehicle_more_info">{% if highest_bid %}
+                <span class="badge highest-bid mb-2">Highest Bid: Ksh{{ highest_bid.amount|intcomma }}</span>
+
+                {% else %}
+                <span class="badge highest-bid mb-2" >Highest Bid :No bids yet.</span>
+                {% endif %}
+                </span><br>
+                <h6>Reserved Price: <label>Ksh {{vehicle.reserve_price|intcomma}}</label> </h6>    
+                <!-- <p>Auction Ends: {{ vehicle.current_auction_end_date }}</p> -->
+                {% if vehicle.current_auction_end_date %}
+            <div id="countdown" ></div>
+            <script>
+                // Pass the auction end date to JavaScript
+                const auctionEndDate = "{{ vehicle.current_auction_end_date|date:'Y-m-d H:i:s' }}";
+            </script>           
             </div>
             <div class="contact-btn">
                 <div class="row">
-                    <div class="col-md-12">
-                        <button class="enq-bid"><i class="fa fa-gavel"></i> Bid Now</button>                        
+                    <div class="col-md-10">
+                        {% if user.is_authenticated %}
+                    <button type="button" id="bidbtn" class="btn btn-info p-2 m-2 text-center enq-bid" data-toggle="modal" data-target="#bidModal">
+                         Make a bid
+                    </button>
+                    {% else %}
+                    <a href="{% url 'login' %}?next={% url 'detail' vehicle.id %}"  class="btn btn-info p-2 m-2 text-center">
+                        Login to bid
+                    </a>
+                    {% endif %}
+                    {% else %}
+                        <p>Vehicle not in Auction.</p>
+                    {% endif %}
+                                         
                     </div>
-                    <div class="col-md-6">
-                        <button class="enq-whatsapp"><i class="fa-brands fa-whatsapp"></i> Enquire via Whatsapp</button>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="enq-whatsapp p-2 rounded"><i class="fa-brands fa-whatsapp"></i> Whatsapp Us</button>
+                        </div>
+                        <div class="col-md-6">                            
+                            <button class="enq-call p-2 rounded"><i class="fa fa-phone"></i> Call Now</button>                       
+                        </div>
                     </div>
-                    <div class="col-md-6">                            
-                        <button class="enq-call"><i class="fa fa-phone"></i> Call Now</button>                       
-                    </div>
+                   
                 </div>   
             </div>
             
@@ -171,15 +198,15 @@
         <table class="info_table">
             <tr>
                 <td><span class="info_label"> <i class="fa-solid fa-bus-simple cicon"></i> Model </span></td>
-                <td><span  class="info_data">Porsche</span></td>
+                <td><span  class="info_data">{{vehicle.model}}</span></td>
             </tr> 
             <tr>
                 <td><span class="info_label"> <i class="fa fa-car cicon" aria-hidden="true"></i> Body </span></td>
-                <td><span  class="info_data">Sedan</span></td>
+                <td><span  class="info_data">{{vehicle.body_type}}</span></td>
             </tr>  
             <tr>
-                <td><span class="info_label"> <i class="fa-solid fa-palette cicon"></i> Color </span></td>
-                <td><span  class="info_data">Tan</span></td>
+                <td><span class="info_label"><i class="fa-solid fa-gas-pump cicon"></i> Fuel </span></td>
+                <td><span  class="info_data">{{vehicle.fuel_type}}</span></td>
             </tr>         
         </table>
     </div>
@@ -188,15 +215,15 @@
         <table class="info_table">            
             <tr>
                 <td><span class="info_label"> <i class="fa-solid fa-cable-car cicon"></i> Transmission </span></td>
-                <td><span  class="info_data">Automatic</span></td>
+                <td><span  class="info_data">{{vehicle.transmission}}</span></td>
             </tr>       
             <tr>
                 <td><span class="info_label"> <i class="fa-solid fa-road cicon"></i> Mileage </span></td>
-                <td><span  class="info_data">10,623Km</span></td>
+                <td><span  class="info_data">{{vehicle.mileage|intcomma}},Km</span></td>
             </tr>           
             <tr>
                 <td><span class="info_label"> <i class="fas fa-tachometer-alt cicon"></i> Engine Capacity </span></td>
-                <td><span  class="info_data">Automatic</span></td>
+                <td><span  class="info_data">{{vehicle.engine_cc}} CC</span></td>
             </tr>            
         </table>        
     </div>
