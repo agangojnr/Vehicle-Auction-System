@@ -74,6 +74,8 @@ class Vehicle(models.Model):
     file = models.FileField(upload_to='images/',default='images/default-vehicle.png',blank=True)
     views = models.IntegerField(default=0)
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'registration_no': self.registration_no})
     def __str__(self):
             return self.registration_no
 

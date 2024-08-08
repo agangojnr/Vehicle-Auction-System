@@ -323,17 +323,16 @@
   }
   
   .enq-whatsapp{
-    font-size: 90%;
+
     background: #22c35e;
     border: none;
-    padding: 2% 1% 2% 1%;
+    padding: 2%;
     margin: 1%;
     width: 100%;
     color: #ffffff;
   }
   .enq-call{
-    font-size: 90%;
-    font-size: 100%;
+   
     background: #3dbcec;
     border: none;
     padding: 2%;

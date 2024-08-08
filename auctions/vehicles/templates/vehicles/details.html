@@ -1,6 +1,8 @@
 {% extends 'vehicles/base.html' %}
 {% load static %}
 {% load humanize %}
+{% load social_share %}
+
 
 {% block content %}
 <div class="container cont-details">
@@ -143,17 +145,17 @@
             <div class="contact-btn">
                 <div class="row">
                     <div class="col-md-10">
-                        {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
                     <button type="button" id="bidbtn" class="btn btn-info p-2 m-2 text-center enq-bid" data-toggle="modal" data-target="#bidModal">
-                         Make a bid
+                    <i class="fa fa-gavel"></i> Place a bid
                     </button>
                     {% else %}
-                    <a href="{% url 'login' %}?next={% url 'detail' vehicle.id %}"  class="btn btn-info p-2 m-2 text-center">
+                    <a href="{% url 'login' %}?next={% url 'detail' vehicle.registration_no %}"  class="btn btn-info p-2 m-2 text-center">
                         Login to bid
                     </a>
                     {% endif %}
                     {% else %}
-                        <p>Vehicle not in Auction.</p>
+                        <p>Vehicle not on Auction.</p>
                     {% endif %}
                                          
                     </div>
@@ -171,10 +173,13 @@
             
         </div>
         
-        <div class="col-md-12 enq-share">
+        <div class="col-md-11 enq-share">
             <h6>Share this:</h6>
             <div class="row">
                 <div class="col-md-12">
+                    <span>
+                        {% post_to_whatsapp vehicle.url %}
+                    </span>
                     <i class="fa-brands fa-whatsapp icons"></i>
                     <i class="fa-brands fa-facebook icons"></i>
                     <i class="fa-brands fa-x-twitter icons"></i>
@@ -293,16 +298,17 @@
             </div>
             <div class="modal-body">
                 <div class="image">
-                    <p>{{ vehicle.make }}</p>
+                    <p>{{ vehicle.YOM }} | {{vehicle.make}} | {{vehicle.model}}</p>
                     <img class="card-img-top thumbnail" src="{{ vehicle.file.url }}" style="height:250px" />
                 </div>
                 <form method="POST" action="{% url 'place_bid' vehicle.id %}">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="amount">Bid Amount</label>
+                        <p>Reserve Price :Ksh {{vehicle.reserve_price|intcomma}}</p>
+                       
                         <input type="text" class="form-control" id="amount" name="amount" placeholder="Enter bid amount" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Bid</button>
+                    <button type="submit" class="btn btn-dark">Submit Bid</button>
                 </form>
             </div>
         </div>
