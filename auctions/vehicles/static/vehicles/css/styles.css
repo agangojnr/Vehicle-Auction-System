@@ -2,7 +2,10 @@
 .cont-details{
     padding-top: 4%;
   }
+a{
+  text-decoration: none;
   
+}
   .cont-vehicles{
     padding-top: 6%;
   }
@@ -69,6 +72,7 @@
   
   
   .card{
+      border-radius: 10px !important;
       width: 100%;
   }
   
@@ -76,16 +80,19 @@
   .box{    
       box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.12);
       transition: 1s;
+      border-radius: 5px;
+
   }
   
-  .image{
+  .box .image{
       display: block;
       width:  100%;
-      border-radius: 10px;
+      height: 200px;
+      border-radius: 5px;
   }
   
   .box:hover{
-      transform: scale(1.2);
+      transform: scale(1.1);
       z-index: 2;
   }
   
@@ -324,7 +331,7 @@
     border: none;
     padding: 2%;
     margin: 1%;
-    width: 100%;
+    width: 210px;
     color: #ffffff;
   }
   .enq-call{
@@ -335,6 +342,7 @@
     margin: 1%;
     width: 100%;
     color: #ffffff;
+    margin-bottom: 10px;
   }
   .enq-bid{
     font-size: 100%;
@@ -344,6 +352,7 @@
     margin: 1%;
     width: 100%;
     color: #000000;
+    margin-bottom: 10px;
   }
   
   .enq-share{

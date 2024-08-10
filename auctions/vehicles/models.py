@@ -151,8 +151,8 @@ class VehicleView(models.Model):
 
 
 class AuctionHistory(models.Model):
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name='auction_history')
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='auction_history')
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.RESTRICT, related_name='auction_history')
+    auction = models.ForeignKey(Auction, on_delete=models.RESTRICT, related_name='auction_history')
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     on_bid = models.BooleanField(default=False,)

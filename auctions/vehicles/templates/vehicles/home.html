@@ -57,80 +57,30 @@
 
 <div class="lower-cont1">
   <div class="h-auction row m-3">
-    <h3>AUCTIONS</h3>
+    <h5>UPCOMING AUCTIONS</h5>
   </div>
   
   <div class="row">
+   {% for vehicle in upcoming_auctions %}
    
-   
     <div class="col-md-3">
-      <div class="card">
+      <div class="card rounded">
 
         <div class="box">
-            <img class="image" src="{% static 'images/car6.jpg' %}" />
+            <img class="image" src="{{vehicle.file.url}}" />
         </div>
         
         <div class="card-body">
-          <h6>Toyota Land Cruiser 300 ZX</h6>
+          <p><i class="fa fa-calendar text-danger" aria-hidden="true"></i>
+            {{vehicle.YOM}} | <i class="fa fa-car text-danger" aria-hidden="true"></i>
+            {{vehicle.make}} |<i class="fa-solid fa-gas-pump text-danger"></i> {{vehicle.fuel_type}}</p>
           <p class="card-text">
-            <span>2022</span><label> · </label><span>5 500 km </span><label> · </label><span>1 997 cm3</span><label> · </label><span>Hibrid</span>
+            <span>{{Vehicle.transmission}}</span><label> · </label><span>{{vehicle.mileage}} KM </span><label> · </label><span>{{vehicle.fuel_type}}</span>
           </p>
         </div>
       </div>
     </div>
-
- 
-    <div class="col-md-3">
-      <div class="card">
-
-        <div class="box">
-            <img class="image" src="{% static 'images/car7.jpg' %}" />
-        </div>
-        
-        <div class="card-body">
-          <h6>Toyota Land Cruiser 300 ZX</h6>
-          <p class="card-text">
-            <span>2022</span><label> · </label><span>5 500 km </span><label> · </label><span>1 997 cm3</span><label> · </label><span>Hibrid</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    
-    <div class="col-md-3">
-      <div class="card">
-
-        <div class="box">
-          <img class="image" src="{% static 'images/car7.jpg' %}" />
-        </div>
-        
-        <div class="card-body">
-          <h6>Toyota Land Cruiser 300 ZX</h6>
-          <p class="card-text">
-            <span>2022</span><label> · </label><span>5 500 km </span><label> · </label><span>1 997 cm3</span><label> · </label><span>Hibrid</span>
-          </p>
-        </div>
-       
-      </div>
-    </div>
-
-
-    <div class="col-md-3">
-      <div class="card">
-
-        <div class="box">
-          <img class="image" src="{% static 'images/car6.jpg' %}" />
-        </div>
-        
-        <div class="card-body">
-          <h6>Toyota Land Cruiser 300 ZX</h6>
-          <p class="card-text">
-            <span>2022</span><label> · </label><span>5 500 km </span><label> · </label><span>1 997 cm3</span><label> · </label><span>Hibrid</span>
-          </p>
-        </div>
-      </div>
-    </div>
-
+    {% endfor %}
   </div>
 
   <div class="row mt-5">

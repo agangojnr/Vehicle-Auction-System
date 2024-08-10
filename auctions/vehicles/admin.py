@@ -8,6 +8,12 @@ from .models import Auction, Vehicle, AuctionHistory
 from django.contrib import admin, messages
 from .forms import AuctionForm
 from django.utils import timezone
+from django.contrib import admin
+from django.utils import timezone
+from .models import Auction, Vehicle, AuctionHistory
+from django.contrib import admin
+from django.utils import timezone
+from .models import Auction
 from .models import (
     VehicleImage, VehicleMake, VehicleModel, 
     ManufactureYear, FuelType, VehicleBody, Vehicle, Bidding, Auction, VehicleView, AuctionHistory
@@ -26,7 +32,7 @@ class BidInline(admin.TabularInline):
 
 class VehicleViewInline(admin.TabularInline):
     model = VehicleView
-    extra = 1 
+    # extra = 1 
     readonly_fields=('vehicle','user','viewed_at')
     can_delete = False
 
@@ -37,6 +43,7 @@ class VehicleAdmin(admin.ModelAdmin):
     search_fields = ('make__name', 'registration_no','model__name', 'YOM__year', 'status')
     list_filter = ('status','make', 'model', 'YOM', 'body_type', 'fuel_type', 'created_at', 'updated_at')
     inlines = [VehicleImageInline, BidInline,VehicleViewInline]
+    readonly_fields = ('views',)
 
     def current_auction_end_date(self, obj):
         return obj.current_auction_end_date()
@@ -70,14 +77,6 @@ class VehicleBodyAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 # vehicles/admin.py
-
-from django.contrib import admin
-from django.utils import timezone
-from .models import Auction, Vehicle, AuctionHistory
-from django.contrib import admin
-from django.utils import timezone
-from .models import Auction
-
 class EndedFilter(admin.SimpleListFilter):
     title = 'ended'
     parameter_name = 'ended'
